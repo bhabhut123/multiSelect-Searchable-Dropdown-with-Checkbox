@@ -1,0 +1,142 @@
+<!DOCTYPE html> 
+<html> 
+
+<head> 
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<style> 
+		h1 { 
+			color: green; 
+		} 
+
+		.multipleSelection { 
+			width: 300px; 
+			background-color: #BCC2C1; 
+		} 
+
+		.selectBox { 
+			position: relative; 
+		} 
+
+		.selectBox select { 
+			width: 100%; 
+			font-weight: bold; 
+		} 
+
+		.overSelect { 
+			position: absolute; 
+			left: 0; 
+			right: 0; 
+			top: 0; 
+			bottom: 0; 
+		} 
+
+		#checkBoxes { 
+			display: none; 
+			border: 1px #8DF5E4 solid; 
+		} 
+
+		#checkBoxes label { 
+			display: block; 
+		} 
+
+		#checkBoxes label:hover { 
+			background-color: #4F615E; 
+		} 
+	</style> 
+</head> 
+
+<body> 
+
+	<form> 
+		<div class="multipleSelection"> 
+			<div class="selectBox"
+				onclick="showCheckboxes()"> 
+				<select id="selectitem"> 
+					<option>Select Item</option> 
+				</select> 
+				<div class="overSelect"></div> 
+			</div> 
+
+            <div id="checkBoxes" style="overflow-y: auto ; max-height: 100px;"> 
+              
+                <input type="text" id="text" placeholder="Search Items">
+            
+                <label class="filterclass"> 
+                <input type="checkbox" id="1" name="item" value="Afghanistan">Afghanistan
+                </label>
+           
+                <label class="filterclass"> 
+                <input type="checkbox" id="2" name="item" value="Albania">Albania
+               </label>
+            
+                <label class="filterclass"> 
+                <input type="checkbox" id="3" name="item" value="Algeria">Algeria
+                </label>
+         
+                <label class="filterclass"> 
+                <input type="checkbox" id="4" name="item" value="American Samoa">American Samoa
+            </label>
+             
+                <label class="filterclass"> 
+                <input type="checkbox" id="5" name="item" value="Andorra">Bandra
+               </label>
+              
+                <label class="filterclass"> 
+                <input type="checkbox" id="6" name="item" value="Angola">Angola
+               </label>
+            
+                <label class="filterclass"> 
+                <input type="checkbox" id="7" name="item" value="Anguilla">Mundara
+                </label>
+             
+                <label class="filterclass"> 
+                <input type="checkbox" id="8" name="item" value="Antigua & Barbuda">Antigua & Barbuda
+               </label>
+                
+               
+              
+			</div> 
+		</div> 
+	</form> 
+
+	<script> 
+	 
+
+		function showCheckboxes() { 
+		
+        $("#checkBoxes").toggle(); 
+        $("#text").val(''); 
+        
+        $('.filterclass').each(function () {       
+        $(this).show()
+    })
+		
+        } 
+        
+      $("input[type='checkbox'][name='item']").click(function() {
+    // access properties using this keyword
+    var num=0;
+    $("input[type='checkbox'][name='item']").each(function () {  
+        if ( this.checked ) {     
+            num=num+1
+        }
+        
+    })
+    if(num!=0)
+        $("#selectitem option:first").text('Item('+num+')');
+    else
+        $("#selectitem option:first").text("Select Item");
+});
+$("#text").keyup(function () {
+    var re = new RegExp($(this).val(), "i")
+    $('.filterclass').each(function () {
+        var text = $(this).text(),
+            matches = !! text.match(re);
+        $(this).toggle(matches)
+    })
+})
+	</script> 
+</body> 
+
+</html> 
